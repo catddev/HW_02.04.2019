@@ -1,5 +1,5 @@
 ﻿#include"Books.h"
-
+//setters
 void Book::set_author(const char * str)
 {
 	strcpy_s(this->author, str);
@@ -10,9 +10,9 @@ void Book::set_name(const char * str)
 	strcpy_s(this->name, str);
 }
 
-void Book::set_publish(const char * str)
+void Book::set_publisher(const char * str)
 {
-	strcpy_s(this->publish, str);
+	strcpy_s(this->publisher, str);
 }
 
 void Book::set_year(int y)
@@ -25,12 +25,25 @@ void Book::set_pages(int p)
 	this->pages = p;
 }
 
-void Book::print()
+Book::Book()
 {
-	cout << author << ". " << name << endl;
-	cout << publish << ": " << year << "г., " << pages << "с." << endl;
+	strcpy_s(author, "");
+	strcpy_s(name, "");
+	strcpy_s(publisher, "");
+	year = 0;
+	pages = 0;
 }
 
+Book::Book(const char * author, const char * name, const char * publisher, int year, int pages)
+{
+	strcpy_s(this->author, author);
+	strcpy_s(this->name, name);
+	strcpy_s(this->publisher, publisher);
+	this->year = year;
+	this->pages = pages;
+}
+
+//getters
 const char * Book::get_author()
 {
 	return author;
@@ -41,9 +54,9 @@ const char * Book::get_name()
 	return name;
 }
 
-const char * Book::get_publish()
+const char * Book::get_publisher()
 {
-	return publish;
+	return publisher;
 }
 
 int Book::get_year()
@@ -64,9 +77,9 @@ bool Book::by_author(const char * str)
 		return false;
 }
 
-bool Book::by_publish(const char * str)
+bool Book::by_publisher(const char * str)
 {
-	if (strcmp(publish, str) == 0)
+	if (strcmp(publisher, str) == 0)
 		return true;
 	else
 		return false;
@@ -75,4 +88,9 @@ bool Book::by_publish(const char * str)
 bool Book::by_year(int y)
 {
 	return (year > y);
+}
+void Book::print()
+{
+	cout << author << ". " << name << endl;
+	cout << publisher << ": " << year << "г., " << pages << "с." << endl;
 }
